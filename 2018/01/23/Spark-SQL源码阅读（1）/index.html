@@ -79,21 +79,21 @@
 
 
 
-<meta name="description" content="Spark SQL 简介Spark SQL提供了SQL接口给开发人员使用，它的前身是Shark.由于shark过于依赖于Hive制约了Spark的发展，Spark SQL由此产生。 Spark SQL架构 Spark SQL 运行流程">
+<meta name="description" content="Spark SQL简介Spark SQL的前身是Shark,由于Shark过分依赖于Hive限制了Spark的发展，Spark SQL由此而生。 Spark SQL流程解析">
 <meta name="keywords" content="spark">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark SQL源码阅读（1）">
 <meta property="og:url" content="http://yoursite.com/2018/01/23/Spark-SQL源码阅读（1）/index.html">
 <meta property="og:site_name" content="Alex Blog">
-<meta property="og:description" content="Spark SQL 简介Spark SQL提供了SQL接口给开发人员使用，它的前身是Shark.由于shark过于依赖于Hive制约了Spark的发展，Spark SQL由此产生。 Spark SQL架构 Spark SQL 运行流程">
+<meta property="og:description" content="Spark SQL简介Spark SQL的前身是Shark,由于Shark过分依赖于Hive限制了Spark的发展，Spark SQL由此而生。 Spark SQL流程解析">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/Users/alex/Downloads/21b084057c273089e27b63853b339838.jpg.png">
-<meta property="og:image" content="http://yoursite.com/Users/alex/Downloads/dd7bece0366700bffa0cb0e9d90bdb63.png">
-<meta property="og:updated_time" content="2018-01-23T08:02:15.838Z">
+<meta property="og:image" content="http://yoursite.com/2018/01/23/Spark-SQL源码阅读（1）/Users/alex/github_blog/source/_posts/Spark-SQL源码阅读（1）/21b084057c273089e27b63853b339838.jpg.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/23/Spark-SQL源码阅读（1）/Users/alex/github_blog/source/_posts/Spark-SQL源码阅读（1）/dd7bece0366700bffa0cb0e9d90bdb63.png">
+<meta property="og:updated_time" content="2018-01-23T08:40:17.841Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark SQL源码阅读（1）">
-<meta name="twitter:description" content="Spark SQL 简介Spark SQL提供了SQL接口给开发人员使用，它的前身是Shark.由于shark过于依赖于Hive制约了Spark的发展，Spark SQL由此产生。 Spark SQL架构 Spark SQL 运行流程">
-<meta name="twitter:image" content="http://yoursite.com/Users/alex/Downloads/21b084057c273089e27b63853b339838.jpg.png">
+<meta name="twitter:description" content="Spark SQL简介Spark SQL的前身是Shark,由于Shark过分依赖于Hive限制了Spark的发展，Spark SQL由此而生。 Spark SQL流程解析">
+<meta name="twitter:image" content="http://yoursite.com/2018/01/23/Spark-SQL源码阅读（1）/Users/alex/github_blog/source/_posts/Spark-SQL源码阅读（1）/21b084057c273089e27b63853b339838.jpg.png">
 
 
 
@@ -285,7 +285,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-23T15:58:00+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-23T16:33:42+08:00">
                 2018-01-23
               </time>
             
@@ -323,9 +323,8 @@
       
 
       
-        <h1 id="Spark-SQL-简介"><a href="#Spark-SQL-简介" class="headerlink" title="Spark SQL 简介"></a>Spark SQL 简介</h1><p>Spark SQL提供了SQL接口给开发人员使用，它的前身是Shark.由于shark过于依赖于Hive制约了Spark的发展，Spark SQL由此产生。</p>
-<h1 id="Spark-SQL架构"><a href="#Spark-SQL架构" class="headerlink" title="Spark SQL架构"></a>Spark SQL架构</h1><p><img src="/Users/alex/Downloads/21b084057c273089e27b63853b339838.jpg.png" alt=""></p>
-<h2 id="Spark-SQL-运行流程"><a href="#Spark-SQL-运行流程" class="headerlink" title="Spark SQL 运行流程"></a>Spark SQL 运行流程</h2><p><img src="/Users/alex/Downloads/dd7bece0366700bffa0cb0e9d90bdb63.png" alt=""></p>
+        <h1 id="Spark-SQL简介"><a href="#Spark-SQL简介" class="headerlink" title="Spark SQL简介"></a>Spark SQL简介</h1><p>Spark SQL的前身是Shark,由于Shark过分依赖于Hive限制了Spark的发展，Spark SQL由此而生。<br><img src="/2018/01/23/Spark-SQL源码阅读（1）/Users/alex/github_blog/source/_posts/Spark-SQL源码阅读（1）/21b084057c273089e27b63853b339838.jpg.png" alt=""></p>
+<h1 id="Spark-SQL流程解析"><a href="#Spark-SQL流程解析" class="headerlink" title="Spark SQL流程解析"></a>Spark SQL流程解析</h1><p><img src="/2018/01/23/Spark-SQL源码阅读（1）/Users/alex/github_blog/source/_posts/Spark-SQL源码阅读（1）/dd7bece0366700bffa0cb0e9d90bdb63.png" alt=""></p>
 
       
     </div>
@@ -356,8 +355,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/23/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2018/01/23/Spark-SQL源码阅读（2）/" rel="next" title="Spark SQL源码阅读（2）">
+                <i class="fa fa-chevron-left"></i> Spark SQL源码阅读（2）
               </a>
             
           </div>
@@ -441,7 +440,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -487,7 +486,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spark-SQL-简介"><span class="nav-number">1.</span> <span class="nav-text">Spark SQL 简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spark-SQL架构"><span class="nav-number">2.</span> <span class="nav-text">Spark SQL架构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spark-SQL-运行流程"><span class="nav-number">2.1.</span> <span class="nav-text">Spark SQL 运行流程</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spark-SQL简介"><span class="nav-number">1.</span> <span class="nav-text">Spark SQL简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spark-SQL流程解析"><span class="nav-number">2.</span> <span class="nav-text">Spark SQL流程解析</span></a></li></ol></div>
             
 
           </div>
