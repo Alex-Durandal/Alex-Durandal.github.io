@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="数据结构与算法," />
 
 
 
@@ -79,13 +79,34 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Alex Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="一：背景  给定一个主字符串（以 S 代替）和模式串（以 P 代替），要求找出 P 在 S 中出现的位置，即串的模式匹配问题。今天来介绍解决这一问题的常用算法之一，Knuth-Morris-Pratt 算法（简称 KMP），这个算法是由高德纳（Donald Ervin Knuth）和沃恩·普拉特在1974年构思，同年詹姆斯·H·莫里斯也独立地设计出该算法，最终由三人于1977年联合发表。  在继续">
+<meta name="keywords" content="数据结构与算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KMP算法">
+<meta property="og:url" content="http://yoursite.com/2018/04/23/KMP算法/index.html">
 <meta property="og:site_name" content="Alex Blog">
+<meta property="og:description" content="一：背景  给定一个主字符串（以 S 代替）和模式串（以 P 代替），要求找出 P 在 S 中出现的位置，即串的模式匹配问题。今天来介绍解决这一问题的常用算法之一，Knuth-Morris-Pratt 算法（简称 KMP），这个算法是由高德纳（Donald Ervin Knuth）和沃恩·普拉特在1974年构思，同年詹姆斯·H·莫里斯也独立地设计出该算法，最终由三人于1977年联合发表。  在继续">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/04/23/KMP算法/前后缀.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/23/KMP算法/1.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/23/KMP算法/2.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/23/KMP算法/3.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/23/KMP算法/4.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/23/KMP算法/5.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/23/KMP算法/6.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/23/KMP算法/7.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/23/KMP算法/8.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/23/KMP算法/9.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/23/KMP算法/10.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/23/KMP算法/11.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/23/KMP算法/12.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/23/KMP算法/13.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/23/KMP算法/14.png">
+<meta property="og:updated_time" content="2018-04-23T08:04:23.202Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Alex Blog">
+<meta name="twitter:title" content="KMP算法">
+<meta name="twitter:description" content="一：背景  给定一个主字符串（以 S 代替）和模式串（以 P 代替），要求找出 P 在 S 中出现的位置，即串的模式匹配问题。今天来介绍解决这一问题的常用算法之一，Knuth-Morris-Pratt 算法（简称 KMP），这个算法是由高德纳（Donald Ervin Knuth）和沃恩·普拉特在1974年构思，同年詹姆斯·H·莫里斯也独立地设计出该算法，最终由三人于1977年联合发表。  在继续">
+<meta name="twitter:image" content="http://yoursite.com/2018/04/23/KMP算法/前后缀.png">
 
 
 
@@ -115,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/23/KMP算法/"/>
 
 
 
 
 
-  <title>Alex Blog</title>
+  <title>KMP算法 | Alex Blog</title>
   
 
 
@@ -140,8 +161,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -234,9 +254,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -266,9 +286,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/23/KMP算法/" itemprop="url">KMP算法</a></h1>
+          <h1 class="post-title" itemprop="name headline">KMP算法</h1>
         
 
         <div class="post-meta">
@@ -318,9 +336,7 @@
       
 
       
-        
-          
-            <h1 id="一：背景"><a href="#一：背景" class="headerlink" title="一：背景"></a>一：背景</h1><p>  给定一个主字符串（以 S 代替）和模式串（以 P 代替），要求找出 P 在 S 中出现的位置，即串的模式匹配问题。今天来介绍解决这一问题的常用算法之一，Knuth-Morris-Pratt 算法（简称 KMP），这个算法是由高德纳（Donald Ervin Knuth）和沃恩·普拉特在1974年构思，同年詹姆斯·H·莫里斯也独立地设计出该算法，最终由三人于1977年联合发表。<br>  在继续下面的内容之前，有必要在这里介绍下两个概念：<strong>前缀</strong>和<strong>后缀</strong>。<br><img src="/2018/04/23/KMP算法/前后缀.png" alt=""><br>由上图所得， “前缀”指除了最后一个字符以外，一个字符串的全部头部组合；”后缀”指除了第一个字符以外，一个字符串的全部尾部组合。</p>
+        <h1 id="一：背景"><a href="#一：背景" class="headerlink" title="一：背景"></a>一：背景</h1><p>  给定一个主字符串（以 S 代替）和模式串（以 P 代替），要求找出 P 在 S 中出现的位置，即串的模式匹配问题。今天来介绍解决这一问题的常用算法之一，Knuth-Morris-Pratt 算法（简称 KMP），这个算法是由高德纳（Donald Ervin Knuth）和沃恩·普拉特在1974年构思，同年詹姆斯·H·莫里斯也独立地设计出该算法，最终由三人于1977年联合发表。<br>  在继续下面的内容之前，有必要在这里介绍下两个概念：<strong>前缀</strong>和<strong>后缀</strong>。<br><img src="/2018/04/23/KMP算法/前后缀.png" alt=""><br>由上图所得， “前缀”指除了最后一个字符以外，一个字符串的全部头部组合；”后缀”指除了第一个字符以外，一个字符串的全部尾部组合。</p>
 <h1 id="二：朴素字符串匹配算法"><a href="#二：朴素字符串匹配算法" class="headerlink" title="二：朴素字符串匹配算法"></a>二：朴素字符串匹配算法</h1><p>  初遇串的模式匹配问题，我们脑海中的第一反应，必是朴素字符串匹配（暴力匹配），即遍历 S 的每个字符，以该字符为始与 P 比较，全部匹配就输出；否则直到 S 结束。代码如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">/* 字符串下标始于0 */</span><br><span class="line">int NaiveStringSearch(string S, string P)</span><br><span class="line">&#123;</span><br><span class="line">    int i = 0;    //S的下标</span><br><span class="line">    int j = 0;    //P的下标</span><br><span class="line">    int s_len = S.size();</span><br><span class="line">    int p_len = P.size();</span><br><span class="line"></span><br><span class="line">    while (i &lt; s_len &amp;&amp; j &lt; p_len)</span><br><span class="line">    &#123;</span><br><span class="line">        if (S[i] == P[j])  //若相等，都前进一步</span><br><span class="line">        &#123;</span><br><span class="line">            i++;</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">        else  //不相等</span><br><span class="line">        &#123;</span><br><span class="line">            i = i - j + 1;</span><br><span class="line">            j = 0;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (j == p_len)  //匹配成功</span><br><span class="line">        return i - j;</span><br><span class="line"></span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>  上述算法的时间复杂度为 $O(nm)$，其中 $n$ 为 S 的长度，$m$ 为 P 的长度。这种时间复杂度很难满足我们的需求，接下来进入正题：时间复杂度为 $Θ(n+m)$ 的 KMP 算法。</p>
@@ -455,8 +471,6 @@
 <p>  在此也给各位读者提个醒，KMP算法严格来说分为KMP算法（未优化版）和KMP算法（优化版），所以建议读者在表述KMP算法时，最好告知你的版本，因为两者在某些情况下区别很大，这里简单说下。<br>  <strong>KMP算法（未优化版）：</strong> next数组表示最长的相同前后缀的长度，我们不仅可以利用next来解决模式串的匹配问题，也可以用来解决类似字符串重复问题等等，这类问题大家可以在各大OJ找到，这里不作过多表述。<br>  <strong>KMP算法（优化版）：</strong> 根据代码很容易知道（名称也改为了nextval），优化后的next仅仅表示相同前后缀的长度，但<strong>不一定是最长</strong>（我个人称之为“最优相同前后缀”）。此时我们利用优化后的next可以在模式串匹配问题中以更快的速度得到我们的答案（相较于未优化版），但是上述所说的字符串重复问题，优化版本则束手无策。<br>  所以，该采用哪个版本，取决于你在现实中遇到的实际问题。</p>
 <p><strong>参考文献：</strong><br>[ 1 ] 严蔚敏. 数据结构（C语言版）<br>[ 2 ] 阮一峰. <a href="http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html" target="_blank" rel="noopener">字符串匹配的KMP算法</a><br>[ 3 ] <a href="https://segmentfault.com/a/1190000008575379" target="_blank" rel="noopener">https://segmentfault.com/a/1190000008575379</a><br>[ 3 ] <a href="https://blog.csdn.net/yearn520/article/details/6729426" target="_blank" rel="noopener">https://blog.csdn.net/yearn520/article/details/6729426</a></p>
 
-          
-        
       
     </div>
     
@@ -471,170 +485,36 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/22/利用github搭建个人博客/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alex">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Alex Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/22/利用github搭建个人博客/" itemprop="url">利用github搭建个人博客</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-22T16:38:25+08:00">
-                2018-04-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/数据结构与算法/" rel="tag"># 数据结构与算法</a>
           
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>之前学习一直都没有记录的习惯，导致学到后面忘了前面，经常花费很多时间去做重复劳动。而且知识点没梳理，不能形成一个系统，学习不够深入和全面。所以决定开始自己写博客，记录自己的学习过程。<br>使用CSDN写博客感觉上传图片资源挺麻烦的，而且界面不是很美观，于是决定在github上搭建个人博客。一来迁移方便，二来免费，写作自由度高。下面介绍一下如何利用github搭建个人博客，主要分为以下几步：</p>
-<ol>
-<li>github账号和仓库</li>
-<li>安装Node.js和hexo</li>
-<li>发布文章</li>
-<li>关联github账号 </li>
-<li>主题配置</li>
-<li>hexo添加图片</li>
-</ol>
-<hr>
-<h2 id="一、github账号和仓库"><a href="#一、github账号和仓库" class="headerlink" title="一、github账号和仓库"></a>一、github账号和仓库</h2><p>注册github账号就不介绍了，在<a href="https://github.com" target="_blank" rel="noopener">官网</a>上注册即可。<br>然后创建博客仓库,仓库名称要与账号名称一致，仓库名为账username.github.io (其中username为你的账号名称)<br><img src="/2018/04/22/利用github搭建个人博客/create repo.png" alt="创建仓库"></p>
-<h2 id="二、安装Node-js和hexo"><a href="#二、安装Node-js和hexo" class="headerlink" title="二、安装Node.js和hexo"></a>二、安装Node.js和hexo</h2><p>hexo是基于nodejs的，需安装nodejs<br>Mac安装nodejs可以选择homebrew<br>安装顺序：homebrew—-&gt;nodejs—-&gt;hexo<br>安装homebrew<br><code>ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</code><br>安装nodejs<br><code>brew install node</code><br>安装hexo<br><code>sudo npm install -g hexo</code></p>
-<p>windows下可以上<a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">官网</a>下载</p>
-<h2 id="三、发布文章"><a href="#三、发布文章" class="headerlink" title="三、发布文章"></a>三、发布文章</h2><p>创建文件夹，此文件夹为博客的根目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir blog</span><br><span class="line">cd blog</span><br><span class="line">hexo init</span><br></pre></td></tr></table></figure></p>
-<p>此时blog文件下出现了很多文件和文件夹，如下图所示：<br><img src="/2018/04/22/利用github搭建个人博客/hexo init.png" alt="hexo init"></p>
-<p>生成静态页面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo generate /** 生成一套静态网页 **/  </span><br><span class="line">hexo server /** 在服务器上运行 **/</span><br></pre></td></tr></table></figure></p>
-<p>在浏览器上运行<a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a>就能看到如下的网站首页：<br><img src="/2018/04/22/利用github搭建个人博客/hexo generate.jpg" alt="hexo generate"><br>这里显示的是默认的主题和hello world.md页面内容，我们可以添加自己的文章</p>
-<p>撰写博客<br>进入终端，使用cd命令进入到有Hexo框架的目录里面，输入：<br><code>hexo new post &quot;我的第一篇博客&quot;</code><br>随后出现如下的消息：<br><code>INFO  Created: ~/blog/source/_posts/我的第一篇博客.md</code><br>证明创建文章成功，“我的第一篇博客”这个md文件会创建在source/_posts/的文件下。该md文件在自动生成时会带有一些属性：<br>title: 定义了博文的标题<br>date: 定义了创作博文的时间<br>tags: 定义了博文的标签<br>除了这个三个属性以外我们还可以扩展一些属性：<br>update:  定义了最后修改的时间<br>comments: 定义能否评论此博文(默认为true)<br>categories: 定义了博文的种类</p>
-<h2 id="四、关联github账号"><a href="#四、关联github账号" class="headerlink" title="四、关联github账号"></a>四、关联github账号</h2><p>执行到第三部分我们已经可以发布文章了，但是文章没有同步到github上，只能本地访问。我们需要将本地目录关联到github账号上。可以通过修改_config.yml配置文件实现，hexo的每一个功能的配置文件都是_config.yml，具体说明看下面的注解：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"># Hexo Configuration  </span><br><span class="line">## Docs: https://hexo.io/docs/configuration.html  </span><br><span class="line">## Source: https://github.com/hexojs/hexo/  </span><br><span class="line">  </span><br><span class="line"># Site                 ##修改以适应搜索引擎的收录  </span><br><span class="line">title: Hexo            ##定义网站的标题  </span><br><span class="line">subtitle:              ##定义网站的副标题  </span><br><span class="line">description:           ##定义网站的描述  </span><br><span class="line">author: jason jwl      ##定义网站的负责人  </span><br><span class="line">language:              ##定义网站的语言,默认zh-Hans  </span><br><span class="line">timezone:              ##定义网站的时区  </span><br><span class="line">  </span><br><span class="line"># URL  </span><br><span class="line">## If your site is put in a subdirectory, set url as &apos;http://yoursite.com/child&apos; and root as &apos;/child/&apos;  </span><br><span class="line">url: http://yoursite.com   ##定义网站访问的域名  </span><br><span class="line">root: /      ##定义所在Web文件夹在哪个目录  </span><br><span class="line">permalink: :year/:month/:day/:title/  ##定义时间格式  </span><br><span class="line">permalink_defaults:  </span><br><span class="line">  </span><br><span class="line"># Directory  </span><br><span class="line">source_dir: source   ##定义从哪个文件夹获取博客资料  </span><br><span class="line">public_dir: public   ##定义生成静态网站到哪个文件夹  </span><br><span class="line">  </span><br><span class="line">archive_dir: archives  </span><br><span class="line">category_dir: categories  </span><br><span class="line">code_dir: downloads/code  </span><br><span class="line">i18n_dir: :lang  </span><br><span class="line">skip_render:  </span><br><span class="line">  </span><br><span class="line"># Writing  </span><br><span class="line">new_post_name: :title.md # File name of new posts  </span><br><span class="line">default_layout: post  </span><br><span class="line">titlecase: false # Transform title into titlecase  </span><br><span class="line">external_link: true # Open external links in new tab  </span><br><span class="line">filename_case: 0  </span><br><span class="line">render_drafts: false  </span><br><span class="line">post_asset_folder: false  </span><br><span class="line">relative_link: false  </span><br><span class="line">future: true  </span><br><span class="line">highlight:  </span><br><span class="line">  enable: true  </span><br><span class="line">  line_number: true  </span><br><span class="line">  auto_detect: false  </span><br><span class="line">  tab_replace:  </span><br><span class="line">  </span><br><span class="line"># Category &amp; Tag  </span><br><span class="line">default_category: uncategorized  </span><br><span class="line">category_map:  </span><br><span class="line">tag_map:  </span><br><span class="line">  </span><br><span class="line"># Date / Time format  </span><br><span class="line">## Hexo uses Moment.js to parse and display date  </span><br><span class="line">## You can customize the date format as defined in  </span><br><span class="line">## http://momentjs.com/docs/#/displaying/format/  </span><br><span class="line">date_format: YYYY-MM-DD  </span><br><span class="line">time_format: HH:mm:ss  </span><br><span class="line">  </span><br><span class="line"># Pagination  </span><br><span class="line">## Set per_page to 0 to disable pagination  </span><br><span class="line">per_page: 10  ##定义每一页多少条博客  </span><br><span class="line">pagination_dir: page  </span><br><span class="line">  </span><br><span class="line"># Extensions  </span><br><span class="line">## Plugins: https://hexo.io/plugins/  </span><br><span class="line">## Themes: https://hexo.io/themes/  </span><br><span class="line">theme: landscape  ##定义使用的主题  </span><br><span class="line">  </span><br><span class="line"># Deployment  </span><br><span class="line">## Docs: https://hexo.io/docs/deployment.html  </span><br><span class="line">deploy:  </span><br><span class="line">  type:</span><br></pre></td></tr></table></figure>
-<p>注意：修改这些属性时，请注意格式，属性和值要空一个格，比如theme: landscape<br>关联github账号只需修改deploy配置即可，添加如下三行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@github.com:yourname/yourname.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></p>
-<p>这样就关联好了github，回到命令行窗口，输入<code>npm install hexo-deployer-git --save</code><br>接下来需要在hexo目录下做两件事:<br><code>hexo g</code>(hexo generate的缩写)生成md文件的静态页面.md文件在hexo/source/_posts目录下。如果新写的md文件，复制到此即可. 生成的静态文件在public目录下，我们将其push到github就ok了。<br><code>hexo d</code>(hexo depoly的缩写)将public文件夹东西推到仓库上，此时浏览器输入<a href="https://yourname.github.io就能看到自己博客啦!" target="_blank" rel="noopener">https://yourname.github.io就能看到自己博客啦!</a><br>还有个命令<code>hexo clean</code>作用是清除缓存db.json和public文件夹.</p>
-<h2 id="五、主题配置"><a href="#五、主题配置" class="headerlink" title="五、主题配置"></a>五、主题配置</h2><p>默认的主题不太好看，我们可以使用其他主题。这里使用点赞最高的<a href="http://theme-next.iissnan.com/getting-started.html#stable" target="_blank" rel="noopener">next</a>主题。<br>在博客根目录下执行:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/iissnan/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure></p>
-<p>然后在博客根目录下的_config.yml下的theme的名称landscape修改为next即可。重新生成博客,就能看到next主题的效果了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure></p>
-<p>更换其他主题方法类似。</p>
-<h2 id="六、hexo添加图片"><a href="#六、hexo添加图片" class="headerlink" title="六、hexo添加图片"></a>六、hexo添加图片</h2><p>博客添加图片可以直接使用图床，在markdown中直接使用图片链接即可。但是用起来不太方便，每次都要先上传文件到图床中。那可不可以直接添加本地图片，然后发布文章时，图片和文章一起上传到github上呢？答案是当然可以啦！！</p>
-<p>添加本地图片过程：</p>
-<ol>
-<li>把主页配置文件_config.yml 里的post_asset_folder:这个选项设置为true</li>
-<li>在你的hexo目录下执行这样一句话<code>npm install hexo-asset-image --save</code>，这是下载安装一个可以上传本地图片的插件</li>
-<li>再运行<code>hexo n &quot;xxxx&quot;</code>来生成md博文时，/source/_posts文件夹内除了xxxx.md文件还有一个同名的文件夹</li>
-<li>最后在xxxx.md中想引入图片时，先把图片复制到xxxx这个文件夹中，然后只需要在xxxx.md中按照markdown的格式引入图片：<br><code>![你想输入的替代文字](xxxx/图片名.jpg)</code><br>注意： xxxx是这个md文件的名字，也是同名文件夹的名字。只需要有文件夹名字即可，不需要有什么绝对路径。你想引入的图片就只需要放入xxxx这个文件夹内就好了，很像引用相对路径。</li>
-<li>最后检查一下，hexo g生成页面后，进入public\2017\02\26\index.html文件中查看相关字段，可以发现，html标签内的语句是<code>&lt;img src=&quot;2017/02/26/xxxx/图片名.jpg&quot;&gt;</code>，而不是<code>&lt;img src=&quot;xxxx/图片名.jpg&gt;</code>。这很重要，关乎你的网页是否可以真正加载你想插入的图片。</li>
-</ol>
-<p>另一种方法<br>本地source中建立img文件夹<br><code>&lt;img src=&quot;img/图片名.jpg&gt;</code></p>
-<p>这个比较方便</p>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://blog.csdn.net/yanzi1225627/article/details/54566792" target="_blank" rel="noopener">https://blog.csdn.net/yanzi1225627/article/details/54566792</a><br><a href="https://blog.csdn.net/gdutxiaoxu/article/details/53576018" target="_blank" rel="noopener">https://blog.csdn.net/gdutxiaoxu/article/details/53576018</a><br><a href="https://blog.csdn.net/sugar_rainbow/article/details/57415705" target="_blank" rel="noopener">https://blog.csdn.net/sugar_rainbow/article/details/57415705</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
       
 
       
       
-        <div class="post-eof"></div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/22/利用github搭建个人博客/" rel="next" title="利用github搭建个人博客">
+                <i class="fa fa-chevron-left"></i> 利用github搭建个人博客
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
       
     </footer>
   </div>
@@ -644,10 +524,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -655,6 +536,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -675,8 +560,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -727,6 +621,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一：背景"><span class="nav-number">1.</span> <span class="nav-text">一：背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二：朴素字符串匹配算法"><span class="nav-number">2.</span> <span class="nav-text">二：朴素字符串匹配算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三：KMP字符串匹配算法"><span class="nav-number">3.</span> <span class="nav-text">三：KMP字符串匹配算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-算法流程"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 算法流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-next数组是如何求出的"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 next数组是如何求出的</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四：完整代码"><span class="nav-number">4.</span> <span class="nav-text">四：完整代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五：KMP优化"><span class="nav-number">5.</span> <span class="nav-text">五：KMP优化</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -867,6 +777,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
